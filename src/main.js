@@ -48,5 +48,7 @@ function updateThirdTodo(event) {
 }
 
 function handleData(event) {
-    console.log(event.target.responseText);
+    const rawData = JSON.parse(event.target.responseText);
+    const {text} = rawData;
+    
 }

@@ -3,7 +3,7 @@ window.onload = init;
 function init() {
     getTodos();
     document.querySelector('#post').addEventListener('click', postTodo);
-    document.querySelector('#put').addEventListener('click', updateThirdTodo);
+    // document.querySelector('#put').addEventListener('click', updateTodo);
 }
 
 function getTodos(event) {
@@ -34,15 +34,23 @@ function postTodo(event) {
     }
 }
 
-function updateThirdTodo(event) {
+function updateTodo(event) {
+    const itemToBeUpdated = event.target;
+    const listId = itemToBeUpdated.id;
+    console.log(listId);
+    
+
+    // Get todo we're updating.
+
+    // Set completed to be !completed.
     const updatedTodo = {
-        text: '????',
-        completed: true
+        text: itemToBeUpdated.innerText,
+        completed: !itemToBeUpdated.completed
     };
     const jsonnedTodo = JSON.stringify(updatedTodo);
     
     const xhr = new XMLHttpRequest();
-    xhr.open('PUT', 'http://localhost:3000/todos/3');
+    xhr.open('PUT', `http://localhost:3000/todos/${listId}`);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = handleData;
     xhr.send(jsonnedTodo);
@@ -57,23 +65,16 @@ function handleData(event) {
 function addToList(rawData) {
     const addingToUl = document.querySelector('#list-items');
     if(addingToUl.childElementCount < rawData.length) {
-        rawData.forEach((text) => {
+        rawData.forEach((text, index) => {
             const newLi = document.createElement('li');
             newLi.innerText = text.text;
+            newLi.id = (index + 1);
+            newLi.addEventListener('click', updateTodo);
             addingToUl.appendChild(newLi);
         });
     } else {
         const newLi = document.createElement('li');
-        console.log(rawData.text)
         newLi.innerText = rawData.text;
         addingToUl.appendChild(newLi);
     }
-}
-
-function toggleDone(event) {
-    const selectedLi = event.target;
-    const index = todos.indexOf(selectedLi.innerText);
-    
-    isDone[index] = !isDone[index];
-    selectedLi.style.textDecoration = !isDone[index] ? 'none' : "line-through";
 }

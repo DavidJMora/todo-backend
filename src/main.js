@@ -2,14 +2,11 @@ window.onload = init;
 
 function init() {
     getTodos();
-    document.querySelector('#get').addEventListener('click', getTodos);
     document.querySelector('#post').addEventListener('click', postTodo);
     document.querySelector('#put').addEventListener('click', updateThirdTodo);
 }
 
 function getTodos(event) {
-    // event.preventDefault();
-
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'http://localhost:3000/todos');
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -26,7 +23,6 @@ function postTodo(event) {
             completed: false
         };
         const jsonnedTodo = JSON.stringify(newTodo);
-        
         
         const xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://localhost:3000/todos');
@@ -72,4 +68,12 @@ function addToList(rawData) {
         newLi.innerText = rawData.text;
         addingToUl.appendChild(newLi);
     }
+}
+
+function toggleDone(event) {
+    const selectedLi = event.target;
+    const index = todos.indexOf(selectedLi.innerText);
+    
+    isDone[index] = !isDone[index];
+    selectedLi.style.textDecoration = !isDone[index] ? 'none' : "line-through";
 }

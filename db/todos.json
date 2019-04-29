@@ -1,29 +1,34 @@
 {
   "todos": [
     {
-      "id": 1,
-      "text": "Build a todo app with a back end",
-      "completed": false
+      "text": "hello",
+      "completed": false,
+      "id": 1
     },
     {
-      "id": 2,
-      "text": "Post a new todo",
-      "completed": false
+      "text": "why wont you work",
+      "completed": false,
+      "id": 2
     },
     {
-      "text": "????",
-      "completed": true,
+      "text": "this is all your fault ginny",
+      "completed": false,
       "id": 3
     },
     {
-      "text": "Profit",
+      "text": "why",
       "completed": false,
       "id": 4
     },
     {
-      "text": "Profit",
+      "text": "hello there",
       "completed": false,
       "id": 5
+    },
+    {
+      "text": "asdf",
+      "completed": false,
+      "id": 6
     }
   ]
 }
